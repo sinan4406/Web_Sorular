@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terminoloji ve Zihniyet · Tekrar Soruları</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fsp:1px;
+  --bg:#06091a;
+  --surface:rgba(17,24,56,.68);
+  --surface-2:rgba(19,29,68,.92);
+  --text:#f2f4ff;
+  --muted:#a8b2d4;
+  --line:rgba(158,174,235,.18);
+  --cyan:#38d9ff;
+  --blue:#5b7cfa;
+  --violet:#a978ff;
+  --pink:#ff7ac6;
+  --orange:#ff9d5c;
+  --yellow:#ffd45c;
+  --green:#56e6a5;
+  --danger:#ff6b8a;
+  --radius-lg:22px;
+  --radius-md:14px;
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+  --mono:"DM Mono",ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{font-size:15px}
+body{
+  margin:0;min-height:100vh;color:var(--text);
+  font-family:"Manrope","Segoe UI",system-ui,sans-serif;font-size:calc(1rem + var(--fsp));line-height:1.6;
+  background:
+    radial-gradient(1100px 600px at 85% -10%,rgba(91,124,250,.20),transparent 60%),
+    radial-gradient(900px 520px at -10% 110%,rgba(169,120,255,.16),transparent 60%),
+    var(--bg);
+  background-attachment:fixed;
+}
+code,kbd{font-family:var(--mono);font-size:.92em;background:rgba(56,217,255,.10);color:#bfefff;border:1px solid rgba(56,217,255,.18);border-radius:6px;padding:.05em .38em;white-space:nowrap}
+kbd{background:rgba(255,255,255,.06);color:var(--text);border-color:var(--line)}
+b,strong{color:#fff}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+
+/* Üst şerit */
+.topbar{display:flex;align-items:center;gap:12px;margin-bottom:18px;color:var(--muted);font-size:calc(.8rem + var(--fsp));letter-spacing:.08em;font-weight:700}
+.topbar .dot{width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.topbar .rule{flex:1;height:1px;background:var(--line)}
+.topbar .count{font-family:var(--mono);letter-spacing:0;font-weight:500}
+
+h1.topic{margin:.1em 0 .25em;font-size:calc(clamp(1.5rem,3vw,2.2rem) + var(--fsp));line-height:1.2;font-weight:800;
+  background:linear-gradient(90deg,var(--cyan),var(--violet) 55%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{color:var(--muted);font-size:calc(1.05rem + var(--fsp));margin:0 0 1.2rem}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:26px 28px;backdrop-filter:blur(8px)}
+
+/* Başlangıç ekranı */
+.scope{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:1rem 0 1.4rem}
+.scope div{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-md);padding:12px 14px;font-size:calc(.92rem + var(--fsp))}
+.scope div b{display:block;color:var(--cyan);font-size:calc(.78rem + var(--fsp));letter-spacing:.08em;margin-bottom:2px}
+.types{display:flex;flex-wrap:wrap;gap:8px;margin:.4rem 0 1.4rem}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:calc(.78rem + var(--fsp));font-weight:700;letter-spacing:.04em;padding:4px 11px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted)}
+.chip i{width:7px;height:7px;border-radius:50%;background:currentColor;font-style:normal}
+.chip.c-mc{color:var(--cyan)} .chip.c-code{color:var(--violet)} .chip.c-line{color:var(--danger)} .chip.c-tf{color:var(--yellow)} .chip.c-fill{color:var(--green)} .chip.c-match{color:var(--orange)} .chip.c-order{color:var(--pink)}
+.start-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.toggle{display:inline-flex;align-items:center;gap:8px;color:var(--muted);cursor:pointer;user-select:none}
+.toggle input{width:18px;height:18px;accent-color:var(--violet)}
+.how{margin-top:1.4rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:calc(.88rem + var(--fsp))}
+.how kbd{font-size:.85em}
+
+.btn{border:1px solid transparent;border-radius:12px;padding:11px 20px;font-weight:700;background:linear-gradient(90deg,var(--blue),var(--violet));color:#fff;box-shadow:0 8px 24px rgba(91,124,250,.3);transition:transform .15s,filter .15s}
+.btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn.ghost{background:rgba(255,255,255,.05);border-color:var(--line);box-shadow:none;color:var(--text)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none;filter:none}
+
+/* İlerleme */
+.progress{height:6px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;margin:2px 0 14px}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));transition:width .3s}
+.dots{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.dots button{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-family:var(--mono);font-size:calc(.75rem + var(--fsp));color:var(--muted)}
+.dots button.cur{border-color:var(--cyan);color:#fff;box-shadow:0 0 0 2px rgba(56,217,255,.25)}
+.dots button.ok{background:rgba(86,230,165,.16);border-color:rgba(86,230,165,.5);color:var(--green)}
+.dots button.no{background:rgba(255,107,138,.14);border-color:rgba(255,107,138,.5);color:var(--danger)}
+.qhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.qnum{font-family:var(--mono);color:var(--muted);font-size:calc(.85rem + var(--fsp))}
+.score{font-family:var(--mono);color:var(--muted);font-size:calc(.85rem + var(--fsp))}
+.score b{color:var(--green)}
+.qtext{font-size:calc(1.12rem + var(--fsp));font-weight:600;line-height:1.55;margin:0 0 16px}
+.qtext p{margin:0 0 .5em}
+.hint{color:var(--muted);font-size:calc(.86rem + var(--fsp));margin:-8px 0 14px}
+
+/* Kod */
+pre.code{margin:0 0 16px;background:#050816;border:1px solid var(--line);border-radius:var(--radius-md);padding:14px 16px;overflow:auto;font-family:var(--mono);font-size:calc(.86rem + var(--fsp));line-height:1.65;color:#d7defa;tab-size:2}
+pre.code .fn{display:block;color:var(--muted);font-size:calc(.72rem + var(--fsp));letter-spacing:.06em;margin:-4px 0 8px;font-family:"Manrope",sans-serif;font-weight:700}
+.t-tag{color:#ff8fb8}.t-att{color:#ffd45c}.t-str{color:#7ef0b8}.t-com{color:#6f7aa3;font-style:italic}.t-pun{color:#8f9bd0}.t-ent{color:#38d9ff}.t-key{color:#a978ff}.t-num{color:#ff9d5c}
+.lines{counter-reset:ln;padding:10px 0}
+.lines .ln{display:block;padding:1px 16px 1px 52px;position:relative;cursor:pointer;border-left:3px solid transparent;white-space:pre}
+.lines .ln::before{counter-increment:ln;content:counter(ln);position:absolute;left:10px;width:28px;text-align:right;color:#4f5a85;font-size:.9em}
+.lines .ln:hover{background:rgba(91,124,250,.12)}
+.lines .ln.hit{background:rgba(86,230,165,.14);border-left-color:var(--green)}
+.lines .ln.miss{animation:flash .6s}
+.lines .ln.reveal{background:rgba(255,212,92,.10);border-left-color:var(--yellow)}
+.lines.locked .ln{cursor:default}
+@keyframes flash{0%,100%{background:transparent}30%{background:rgba(255,107,138,.35)}}
+.found{font-family:var(--mono);font-size:calc(.85rem + var(--fsp));color:var(--muted);margin:-6px 0 12px}
+.found b{color:var(--green)}
+
+/* Seçenekler */
+.opts{display:grid;gap:10px}
+.opts.two{grid-template-columns:1fr 1fr}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;padding:13px 15px;border-radius:var(--radius-md);border:1px solid var(--line);background:var(--surface-2);transition:border-color .15s,background .15s}
+.opt:hover:not(:disabled){border-color:rgba(56,217,255,.5);background:rgba(56,217,255,.06)}
+.opt .k{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-family:var(--mono);font-weight:500;background:rgba(255,255,255,.06);color:var(--muted)}
+.opt .tx{padding-top:2px}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--green);background:rgba(86,230,165,.12)}
+.opt.right .k{background:var(--green);color:#06291a}
+.opt.wrong{border-color:var(--danger);background:rgba(255,107,138,.12)}
+.opt.wrong .k{background:var(--danger);color:#2b0610}
+.opt .ow{display:block;margin-top:4px;font-size:calc(.86rem + var(--fsp));color:var(--muted)}
+.tfrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tfrow .opt{justify-content:center;font-weight:800;font-size:calc(1.05rem + var(--fsp));padding:16px}
+
+/* Boşluk doldurma */
+.fill-code{white-space:pre-wrap;overflow-wrap:anywhere}
+.fill-code select,.fill-code input{font-family:var(--mono);font-size:calc(.86rem + var(--fsp));background:#141c40;color:#fff;border:1px dashed var(--cyan);border-radius:6px;padding:1px 4px;margin:0 2px}
+.fill-code input{width:9ch}
+.fill-code select.ok,.fill-code input.ok{border:1px solid var(--green);background:rgba(86,230,165,.18)}
+.fill-code select.no,.fill-code input.no{border:1px solid var(--danger);background:rgba(255,107,138,.18)}
+.fix{font-family:var(--mono);font-size:.85em;color:var(--green);margin-left:2px}
+.fill-text{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-md);padding:14px 16px;margin-bottom:16px;line-height:2.1}
+.fill-text select,.fill-text input{font:inherit;font-size:calc(.95rem + var(--fsp));background:#141c40;color:#fff;border:1px dashed var(--cyan);border-radius:6px;padding:1px 6px}
+.fill-text select.ok,.fill-text input.ok{border:1px solid var(--green);background:rgba(86,230,165,.18)}
+.fill-text select.no,.fill-text input.no{border:1px solid var(--danger);background:rgba(255,107,138,.18)}
+
+/* Eşleştirme */
+.match{display:grid;gap:10px}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) 26px;gap:12px;align-items:center;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-md);padding:10px 14px}
+.mrow .l{font-weight:600}
+.mrow select{width:100%;font:inherit;font-size:calc(.92rem + var(--fsp));background:#141c40;color:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 9px}
+.mrow.ok{border-color:var(--green)} .mrow.no{border-color:var(--danger)}
+.mrow .mk{font-weight:800;text-align:center}
+.mrow.ok .mk{color:var(--green)} .mrow.no .mk{color:var(--danger)}
+.mrow .fixm{grid-column:2/4;font-size:calc(.84rem + var(--fsp));color:var(--green)}
+
+/* Sıralama */
+.order-pool,.order-out{display:grid;gap:8px}
+.order-out{min-height:54px;border:1px dashed var(--line);border-radius:var(--radius-md);padding:10px;margin-bottom:12px;counter-reset:ord}
+.order-out:empty::before{content:"Sırayla tıkladıkların buraya dizilecek";color:var(--muted);font-size:calc(.86rem + var(--fsp));padding:4px}
+.oitem{display:flex;gap:10px;align-items:center;text-align:left;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2)}
+.order-out .oitem{counter-increment:ord}
+.order-out .oitem::before{content:counter(ord);flex:none;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:rgba(169,120,255,.2);color:var(--violet);font-family:var(--mono);font-size:.85em}
+.oitem.ok{border-color:var(--green)} .oitem.no{border-color:var(--danger)}
+.oitem .fixo{margin-left:auto;font-family:var(--mono);font-size:.82em;color:var(--green)}
+
+/* Geri bildirim */
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;align-items:center}
+.actions .sp{flex:1}
+.fb{margin-top:16px;border-radius:var(--radius-md);padding:14px 16px;border:1px solid;display:none}
+.fb.show{display:block;animation:rise .25s ease}
+.fb.ok{border-color:rgba(86,230,165,.5);background:rgba(86,230,165,.08)}
+.fb.no{border-color:rgba(255,107,138,.5);background:rgba(255,107,138,.08)}
+.fb .h{font-weight:800;margin-bottom:4px}
+.fb.ok .h{color:var(--green)} .fb.no .h{color:var(--danger)}
+.fb p{margin:.3em 0 0}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* Sonuç */
+.result{text-align:center;padding:10px 0 4px}
+.ring{width:150px;height:150px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;font-size:calc(2rem + var(--fsp));font-weight:800;
+  background:conic-gradient(var(--green) calc(var(--p)*1%),rgba(255,255,255,.08) 0)}
+.ring span{width:118px;height:118px;border-radius:50%;background:var(--bg);display:grid;place-items:center}
+.msg{color:var(--muted);margin:0 0 18px}
+.review{text-align:left;margin-top:22px}
+.review h3{font-size:calc(1rem + var(--fsp));margin:0 0 10px}
+.review button{display:flex;gap:10px;width:100%;text-align:left;margin-bottom:8px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,107,138,.35);background:rgba(255,107,138,.06)}
+.review button .n{font-family:var(--mono);color:var(--danger);flex:none}
+.center{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+.foot{margin-top:18px;text-align:center;color:#6f7aa3;font-size:calc(.78rem + var(--fsp))}
+
+@media (max-width:640px){
+  html{font-size:14px}
+  .wrap{padding:18px 14px 40px}
+  .card{padding:18px 16px}
+  .opts.two,.tfrow{grid-template-columns:1fr}
+  .mrow{grid-template-columns:1fr 22px}
+  .mrow select{grid-column:1/2}
+  .mrow .l{grid-column:1/3}
+  .mrow .fixm{grid-column:1/3}
+  code{white-space:normal;overflow-wrap:anywhere}
+  .lines .ln{padding-left:40px}
+  .foot{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><span class="dot"></span><span id="kicker">TEKRAR SORULARI · BÖLÜM 0.3</span><span class="rule"></span><span class="count" id="topCount"></span></div>
+  <main id="app"></main>
+  <p class="foot">Kısayollar: <kbd>1</kbd>–<kbd>4</kbd> seçenek · <kbd>Enter</kbd> kontrol et / sonraki · <kbd>←</kbd> <kbd>→</kbd> sorular arası · <kbd>F</kbd> tam ekran</p>
+</div>
+<script>
+const DATA = {"title": "Terminoloji ve Zihniyet", "subtitle": "İstemci–sunucu, HTTP, durum kodları, önbellek, yerel sunucu, üç katman ve hata ararken düşünme biçimi üzerine sınav öncesi tekrar.", "scope": [["KONUŞMA", "İstemci, sunucu, istek–yanıt, HTTP, bir sayfanın onlarca isteği"], ["GÖZLEM", "Network ve Console panelleri, durum kodları, 304 ve sert yenileme"], ["YEREL SUNUCU", "localhost, 127.0.0.1, port, dosya dağıtıcısının sınırları"], ["KATMANLAR", "Frontend, backend, veritabanı; doğrulama; hatayı doğru yerde aramak"]], "questions": [{"t": "tf", "q": "Sunucu, bir sayfadaki veriler değiştiğinde tarayıcıya kendiliğinden haber gönderir.", "a": false, "why": "Kural kesindir: **önce istek, sonra yanıt.** Sunucu, kimse bir şey istemeden kendiliğinden veri göndermez. Sayfa güncel değilse sebebi çoğu zaman kimsenin **yeniden sormamış** olmasıdır."}, {"t": "mc", "q": "Web'de **istemci (client)** rolünü neredeyse her zaman kim üstlenir?", "opts": ["Tarayıcı", "Kullanıcının kendisi", "Veritabanı", "Alan adı"], "a": 0, "optWhy": {"1": "İstekleri sen elle yazmazsın; sen bir adrese gidersin ya da bağlantıya tıklarsın, istekleri tarayıcı senin adına oluşturur."}, "why": "İstemci ve sunucu bir cihazın ya da markanın değil, bir **rolün** adıdır. İstemci isteyen, sunucu sunan taraftır."}, {"t": "code", "lang": "http", "q": "Bir yanıtın sadeleştirilmiş hâli aşağıda. İlk satırdaki **200** sayısının adı nedir ve ne anlatır?", "file": "YANIT", "code": "200 OK\nContent-Type: text/html\nContent-Length: 4231\n\n<!DOCTYPE html>\n<html lang=\"tr\">\n...", "opts": ["Durum kodudur; istek anlaşıldı ve başarıyla karşılandı", "Dosyanın boyutudur; sayfa 200 bayttır", "Header'dır; tarayıcının dilini bildirir", "Port numarasıdır; sunucu 200 numaralı kapıdan yanıt verdi"], "a": 0, "why": "Yanıtın ilk satırındaki sayı **durum kodudur (status code)** ve sunucunun cevabının tek satırlık özetidir. `Content-Type` gibi alt satırlar ise **header** (başlık) denilen ek bilgilerdir."}, {"t": "code", "lang": "html", "q": "Tarayıcı aşağıdaki `index.html` dosyasını açtığında, bu dosyanın kendisi **dâhil** toplam kaç istek yapar?", "file": "index.html", "code": "<head>\n  <link rel=\"stylesheet\" href=\"style.css\">\n  <script src=\"site.js\"><\/script>\n<\/head>\n<body>\n  <img src=\"logo.svg\" alt=\"Okul logosu\">\n  <img src=\"profil.jpg\" alt=\"Profil fotoğrafı\">\n<\/body>", "opts": ["5", "1", "2", "4"], "a": 0, "two": true, "why": "HTML bir **alışveriş listesidir**: görsellerin, CSS'in ve JavaScript'in yalnızca **adresini** içerir. 1 istek `index.html` için, 4 istek de `style.css`, `site.js`, `logo.svg` ve `profil.jpg` için yapılır. Her biri bağımsız olarak başarısız olabilir."}, {"t": "match", "q": "Durum kodlarını anlamlarıyla eşleştir.", "pairs": [["200 OK", "Buyur, işte içerik"], ["301 / 302", "Adres değişti, şuraya git"], ["304 Not Modified", "Dosya değişmedi, kendi kopyanı kullan"], ["404 Not Found", "Böyle bir dosya ya da kayıt yok"], ["500 Internal Server Error", "Sunucu kodunda bir hata oluştu"]], "why": "Ezberlenecek yüzlerce kod yok; **dört aile** var: 2xx başarılı, 3xx yönlendirme ya da \"zaten sende var\", 4xx istemcinin hatası, 5xx sunucunun hatası."}, {"t": "mc", "q": "Network panelinde bir isteğin durum kodu **4xx**. Hatayı **ilk** nerede aramalısın?", "opts": ["Kendi gönderdiğin istekte: dosya yolu, adres, eksik veri, giriş yapılıp yapılmadığı", "Sunucunun hata kayıtlarında", "Veritabanının tablolarında", "Tarayıcının ayarlarında"], "a": 0, "why": "4xx, sunucunun isteği alıp anladığını ve \"bu istek geçerli değil\" dediğini gösterir; sunucu doğru davranmıştır. **5xx** görseydin hata sunucunun içinde olurdu ve sunucu tarafındaki kayıtlara bakardın."}, {"t": "mc", "q": "CSS dosyanda bir rengi değiştirip kaydettin, sayfayı yeniledin ama ekranda hiçbir şey değişmedi. **İlk refleksin** ne olmalı?", "opts": ["Ctrl + Shift + R ile sert yenileme yapmak", "CSS'i satır satır yeniden yazmak", "Bilgisayarı yeniden başlatmak", "HTML dosyasını silip baştan oluşturmak"], "a": 0, "why": "Tarayıcı elindeki eski CSS kopyasını (**önbellek**) kullanmış olabilir. Sert yenileme önbelleği yok sayıp her şeyi baştan ister. Sorun devam ederse artık gerçekten kodda arayabilirsin."}, {"t": "match", "q": "Yerel sunucu adresinin parçalarını görevleriyle eşleştir: `http://127.0.0.1:5500/index.html`", "pairs": [["http://", "Konuşma dili: HTTP kurallarına göre iletişim"], ["127.0.0.1", "\"Bu bilgisayarın kendisi\" anlamına gelen özel adres"], [":5500", "Port: isteğin hangi sunucu programına gideceği"], ["/index.html", "Yol: sunucudan tam olarak ne istendiği"]], "why": "Apartman benzetmesi: `127.0.0.1` binanın adresi, `:5500` daire numarası, `/index.html` o dairede aradığın kişidir. `localhost` yazımı da `127.0.0.1` ile aynı yeri gösterir."}, {"t": "tf", "q": "Live Server gibi bir yerel dosya sunucusu, kullanıcının formla gönderdiği veriyi alıp bir yere kaydedebilir.", "a": false, "why": "Dosya dağıtıcısı sunucu yalnızca diskte **önceden hazır duran** dosyayı bulup gönderir: yeni içerik üretmez, herkese aynı şeyi gönderir ve **hiçbir şey saklamaz.** Veriyi kaydetmek, karar vermek ve yanıtı o an üretmek için backend ve veritabanı gerekir."}, {"t": "match", "q": "Üç katmanı doğru tanımlarıyla eşleştir.", "pairs": [["Frontend", "Kullanıcının tarayıcısında çalışır; gördüğü ve dokunduğu her şey"], ["Backend", "Sunucuda çalışır; isteği anlar, kuralları uygular, karar verir"], ["Veritabanı", "Verinin kalıcı olarak durduğu depo"]], "why": "Restoran benzetmesi: **salon** frontend, **mutfak** backend, **kiler** veritabanıdır. Müşteri mutfağa giremez; bu bir düzen kuralı değil, bir **güvenlik kuralıdır.**"}, {"t": "order", "q": "Bir emlak sitesinde kullanıcı yeni bir ilan yayınlıyor. Adımları **doğru sıraya** diz.", "items": ["Kullanıcı formu doldurur ve \"Yayınla\"ya basar", "Frontend verileri toplar ve sunucuya bir istek olarak gönderir", "Backend isteği karşılar, verileri kontrol eder, yetkiyi sorgular", "Veritabanı ilanı kalıcı olarak kaydeder", "\"Kaydedildi\" yanıtı döner ve ekran güncellenir"], "why": "Kullanıcı zinciri **başlatır** ama hiçbir adımı atlayamaz. Veritabanına giden tek yol **backend'den** geçer."}, {"t": "mc", "q": "Bir fiyat kutusuna harf yazıldığında hem tarayıcıda anında uyarı veriliyor hem de sunucu aynı kontrolü yeniden yapıyor. Bunun sebebi nedir?", "opts": ["Frontend doğrulaması kullanıcı deneyimi içindir ve atlanabilir; backend doğrulaması güvenlik içindir ve atlanamaz", "Gereksiz bir tekrardır; yalnızca frontend kontrolü yeterlidir", "Gereksiz bir tekrardır; yalnızca backend kontrolü yeterlidir", "Tarayıcı kontrolü yalnızca telefonlarda çalıştığı için"], "a": 0, "why": "İki kontrol aynı şeyi yazmak gibi görünse de **farklı iki işi** yapar: biri kullanıcıya yardım eder, diğeri sistemi korur. Birini yazıp diğerini atlamak ikisini de eksik bırakmaktır."}, {"t": "mc", "q": "\"Butona bastım, hiçbir şey olmadı.\" Network paneline baktın: **hiç yeni satır belirmemiş.** Bu ne anlama gelir?", "opts": ["İstek hiç gönderilmemiştir; sorun frontend'dedir, sıradaki durak Console panelidir", "Sunucu çökmüştür; sunucu kayıtlarına bakılmalıdır", "Veritabanı boştur", "İstek başarıyla gitmiştir; sorun ekrana yansıtmadadır"], "a": 0, "why": "Satır yoksa sunucu bu tıklamadan haberdar bile değildir. Butona bir davranış bağlanmamış ya da tarayıcıdaki kod o satıra gelmeden bir hataya düşmüş olabilir; Console'da büyük ihtimalle kırmızı bir hata mesajı vardır."}, {"t": "mc", "q": "Sayfa açılıyor, yazılar duruyor ama **hiç stil yok.** Network panelinde `style.css` satırı var ve durum kodu **404**. Sorun nedir?", "opts": ["CSS dosyasının yolu yanlıştır", "HTML dosyasında yazım hatası vardır", "Sunucu kodunda hata vardır", "Tarayıcı CSS desteklemiyordur"], "a": 0, "why": "Yazıların durması HTML'in geldiğini gösterir. Satır var ama 404 ise istek yapılmış, dosya **o adreste bulunamamıştır.** Satır **hiç olmasaydı** sorun HTML'deki bağlantı satırının eksik ya da hatalı olması olurdu."}, {"t": "mc", "q": "Bir sorunu başkasına (ya da bir yapay zekâya) sorarken aşağıdakilerden hangisi **cevaplanabilir** bir sorudur?", "opts": ["\"İstek gidiyor, 200 dönüyor, yanıtın içinde veri de var ama ekranda görünmüyor.\"", "\"İlanlar sayfam çalışmıyor, bir türlü düzeltemedim.\"", "\"Kodum çalışmıyor, düzelt.\"", "\"Sitemde bir sorun var, nedenini bilmiyorum.\""], "a": 0, "why": "İyi soru, sorunun **nerede olmadığını** da söyler: istek başarılı, veri gelmiş; geriye tek bir alan kalıyor. \"Kodum çalışmıyor\" hiçbir ihtimali elemez."}]};
+</script>
+<script>
+(function(){
+"use strict";
+const app=document.getElementById('app');
+const TYPE={mc:['Çoktan seçmeli','c-mc'],code:['Kod okuma','c-code'],line:['Hata bulma','c-line'],tf:['Doğru / Yanlış','c-tf'],fill:['Boşluk doldurma','c-fill'],match:['Eşleştirme','c-match'],order:['Sıralama','c-order']};
+const KEYS='ABCDEF';
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+// `kod`, **kalın** → HTML (önce kaçış)
+function md(s){
+  if(s==null) return '';
+  const parts=String(s).split('`');
+  return parts.map((p,i)=>{
+    if(i%2) return '<code>'+esc(p)+'</code>';
+    return esc(p).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  }).join('');
+}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+// --- Basit sözdizimi renklendirme (HTML, CSS, HTTP) ---
+function hlHTML(src){
+  let out='',i=0;
+  const re=/<!--[\s\S]*?(?:-->|$)|<\/?[A-Za-z!][^>]*>?|&[#A-Za-z0-9]+;/g;let m;
+  while((m=re.exec(src))){
+    out+=esc(src.slice(i,m.index));
+    const t=m[0];
+    if(t.startsWith('<!--')) out+='<span class="t-com">'+esc(t)+'</span>';
+    else if(t[0]==='&') out+='<span class="t-ent">'+esc(t)+'</span>';
+    else out+=hlTag(t);
+    i=m.index+t.length;
+  }
+  return out+esc(src.slice(i));
+}
+function hlTag(t){
+  const m=/^(<\/?)([!A-Za-z][\w-]*)([\s\S]*?)(\/?>)?$/.exec(t);
+  if(!m) return esc(t);
+  let attrs=m[3].replace(/([^\s=]+)(\s*=\s*)?("[^"]*"?|'[^']*'?|[^\s"'>]+)?/g,function(all,n,eq,v){
+    if(!n) return all;
+    let r='\u0001A'+n+'\u0002';
+    if(eq) r+=eq;
+    if(v) r+='\u0001S'+v+'\u0002';
+    return r;
+  });
+  attrs=esc(attrs).replace(/\u0001A([\s\S]*?)\u0002/g,'<span class="t-att">$1</span>').replace(/\u0001S([\s\S]*?)\u0002/g,'<span class="t-str">$1</span>');
+  return '<span class="t-pun">'+esc(m[1])+'</span><span class="t-tag">'+esc(m[2])+'</span>'+attrs+(m[4]?'<span class="t-pun">'+esc(m[4])+'</span>':'');
+}
+function hlCSS(src){
+  return src.split('\n').map(line=>{
+    let l=esc(line);
+    l=l.replace(/(\/\*.*?\*\/)/g,'<span class="t-com">$1</span>');
+    if(/[{}]/.test(line)||/^\s*[^:]+\{/.test(line)) l=l.replace(/^([^{]*)(\{)/,'<span class="t-tag">$1</span><span class="t-pun">$2</span>');
+    l=l.replace(/^(\s+)([a-z-]+)(\s*:)(\s*)([^;]*)(;?)/,'$1<span class="t-att">$2</span><span class="t-pun">$3</span>$4<span class="t-str">$5</span><span class="t-pun">$6</span>');
+    return l;
+  }).join('\n');
+}
+function hlHTTP(src){
+  return src.split('\n').map(line=>{
+    let l=esc(line);
+    if(/^(GET|POST|PUT|DELETE|HTTP)/.test(line)) return l.replace(/^(\S+)/,'<span class="t-key">$1</span>').replace(/(\d{3})/,'<span class="t-num">$1</span>');
+    if(/^\d{3}/.test(line)) return '<span class="t-num">'+l+'</span>';
+    if(/^[A-Za-z-]+:/.test(line)) return l.replace(/^([A-Za-z-]+)(:)/,'<span class="t-att">$1</span><span class="t-pun">$2</span>');
+    if(line.trim().startsWith('//')) return '<span class="t-com">'+l+'</span>';
+    if(line.trim().startsWith('<')) return hlHTML(line);
+    return l;
+  }).join('\n');
+}
+function hl(src,lang){
+  if(lang==='css') return hlCSS(src);
+  if(lang==='http') return hlHTTP(src);
+  if(lang==='text') return esc(src);
+  return hlHTML(src);
+}
+
+// --- Durum ---
+const ALL=DATA.questions;
+let order=[],state=[],cur=0,mode='start',subset=null;
+
+function start(sh,only){
+  const base=only?only.slice():ALL.map((_,i)=>i);
+  order=sh?shuffle(base):base;
+  state=order.map(()=>({done:false,ok:null,ui:null}));
+  cur=0;mode='quiz';subset=only||null;
+  render();
+}
+function answered(){return state.filter(s=>s.done).length;}
+function correct(){return state.filter(s=>s.ok).length;}
+
+// --- Başlangıç ekranı ---
+function renderStart(){
+  document.getElementById('topCount').textContent=ALL.length+' soru';
+  const types={};ALL.forEach(q=>{types[q.t]=(types[q.t]||0)+1;});
+  const chips=Object.keys(TYPE).filter(k=>types[k]).map(k=>'<span class="chip '+TYPE[k][1]+'"><i></i>'+TYPE[k][0]+' · '+types[k]+'</span>').join('');
+  const scope=DATA.scope.map(s=>'<div><b>'+esc(s[0])+'</b>'+md(s[1])+'</div>').join('');
+  app.innerHTML='<h1 class="topic">'+esc(DATA.title)+'</h1><p class="subtitle">'+md(DATA.subtitle)+'</p>'+
+  '<section class="card"><div style="font-weight:800;margin-bottom:2px">Bu çalışmada neler var?</div>'+
+  '<div class="scope">'+scope+'</div>'+
+  '<div class="types">'+chips+'</div>'+
+  '<div class="start-row"><button class="btn" id="go">Başla →</button>'+
+  '<label class="toggle"><input type="checkbox" id="shuf"> Soruları karışık sırayla sor</label></div>'+
+  '<div class="how"><b style="color:var(--text)">Nasıl çalışır?</b> Her soruda cevabını verdiğin anda doğru mu yanlış mı olduğunu ve <b>nedenini</b> görürsün. Puan, her sorudaki <b>ilk denemene</b> göre hesaplanır. Sonunda yanlış yaptığın soruları yeniden çözebilirsin.</div></section>';
+  document.getElementById('go').onclick=()=>start(document.getElementById('shuf').checked);
+}
+
+// --- Soru ekranı ---
+function renderQuiz(){
+  const qi=order[cur],q=ALL[qi],st=state[cur];
+  document.getElementById('topCount').textContent=(cur+1)+' / '+order.length;
+  const dots=order.map((_,i)=>{const s=state[i];let c=i===cur?'cur ':'';if(s.done)c+=s.ok?'ok':'no';return '<button data-go="'+i+'" class="'+c+'" aria-label="Soru '+(i+1)+'">'+(i+1)+'</button>';}).join('');
+  const ty=TYPE[q.t];
+  let html='<h1 class="topic" style="font-size:calc(clamp(1.2rem,2.2vw,1.6rem) + var(--fsp))">'+esc(DATA.title)+'</h1>'+
+    '<div class="progress"><span style="width:'+(answered()/order.length*100)+'%"></span></div>'+
+    '<div class="dots">'+dots+'</div>'+
+    '<section class="card" id="qcard"><div class="qhead"><span class="chip '+ty[1]+'"><i></i>'+ty[0]+'</span>'+
+    '<span class="score">Doğru: <b>'+correct()+'</b> / '+answered()+'</span></div>'+
+    '<div class="qnum">Soru '+(cur+1)+'</div>'+
+    '<div class="qtext">'+md(q.q)+'</div>';
+  if(q.hint) html+='<p class="hint">'+md(q.hint)+'</p>';
+  html+='<div id="qbody"></div><div class="fb" id="fb"></div>'+
+    '<div class="actions"><button class="btn ghost" id="prev">← Önceki</button><span class="sp"></span>'+
+    '<button class="btn" id="check" style="display:none">Kontrol et</button>'+
+    '<button class="btn" id="next">'+(cur===order.length-1?'Sonucu gör':'Sonraki →')+'</button></div></section>';
+  app.innerHTML=html;
+  app.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{cur=+b.dataset.go;render();});
+  document.getElementById('prev').disabled=cur===0;
+  document.getElementById('prev').onclick=()=>{if(cur>0){cur--;render();}};
+  document.getElementById('next').onclick=()=>{if(cur<order.length-1){cur++;render();}else{mode='end';render();}};
+  const body=document.getElementById('qbody');
+  BUILD[q.t](q,st,body);
+  if(st.done) showFB(q,st,false);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function finish(st,ok,q){
+  st.done=true;st.ok=ok;
+  showFB(q,st,true);
+  document.querySelectorAll('.dots button')[cur].className='cur '+(ok?'ok':'no');
+  document.querySelector('.progress span').style.width=(answered()/order.length*100)+'%';
+  document.querySelector('.score').innerHTML='Doğru: <b>'+correct()+'</b> / '+answered();
+  const c=document.getElementById('check');if(c)c.style.display='none';
+}
+function showFB(q,st){
+  const fb=document.getElementById('fb');
+  fb.className='fb show '+(st.ok?'ok':'no');
+  fb.innerHTML='<div class="h">'+(st.ok?'✓ Doğru':'✕ Yanlış'+(st.extra?' — '+st.extra:''))+'</div>'+(q.why?'<p>'+md(q.why)+'</p>':'');
+}
+
+const BUILD={};
+function codeBlock(q){
+  return '<pre class="code">'+(q.file?'<span class="fn">'+esc(q.file)+'</span>':'')+hl(q.code,q.lang)+'</pre>';
+}
+function optionList(q,st,body,opts,correctIdx,cls){
+  if(!st.ui){
+    const idx=opts.map((_,i)=>i);
+    st.ui={perm:q.noShuffle?idx:shuffle(idx),pick:null};
+  }
+  const perm=st.ui.perm;
+  let h='<div class="opts '+(cls||'')+'">';
+  perm.forEach((oi,k)=>{h+='<button class="opt" data-oi="'+oi+'"><span class="k">'+KEYS[k]+'</span><span class="tx">'+md(opts[oi])+'</span></button>';});
+  h+='</div>';
+  body.insertAdjacentHTML('beforeend',h);
+  const btns=[...body.querySelectorAll('.opt')];
+  function paint(){
+    btns.forEach(b=>{const oi=+b.dataset.oi;b.disabled=true;
+      if(oi===correctIdx)b.classList.add('right');
+      if(oi===st.ui.pick&&oi!==correctIdx)b.classList.add('wrong');
+      if(q.optWhy&&q.optWhy[oi]!=null&&(oi===st.ui.pick||oi===correctIdx)){
+        b.querySelector('.tx').insertAdjacentHTML('beforeend','<span class="ow">'+md(q.optWhy[oi])+'</span>');}
+    });
+  }
+  if(st.done){paint();return;}
+  btns.forEach(b=>b.onclick=()=>{st.ui.pick=+b.dataset.oi;paint();finish(st,st.ui.pick===correctIdx,q);});
+}
+BUILD.mc=function(q,st,body){ if(q.code) body.innerHTML=codeBlock(q); optionList(q,st,body,q.opts,q.a,q.two?'two':''); };
+BUILD.code=BUILD.mc;
+BUILD.tf=function(q,st,body){
+  if(q.code) body.innerHTML=codeBlock(q);
+  if(!st.ui) st.ui={pick:null};
+  body.insertAdjacentHTML('beforeend','<div class="tfrow"><button class="opt" data-v="1"><span class="k">1</span><span class="tx">Doğru</span></button><button class="opt" data-v="0"><span class="k">2</span><span class="tx">Yanlış</span></button></div>');
+  const btns=[...body.querySelectorAll('.opt')];
+  function paint(){btns.forEach(b=>{const v=b.dataset.v==='1';b.disabled=true;if(v===q.a)b.classList.add('right');if(v===st.ui.pick&&v!==q.a)b.classList.add('wrong');});}
+  if(st.done){paint();return;}
+  btns.forEach(b=>b.onclick=()=>{st.ui.pick=b.dataset.v==='1';paint();finish(st,st.ui.pick===q.a,q);});
+};
+BUILD.line=function(q,st,body){
+  const lines=q.code.split('\n');
+  const errs=q.errs, need=errs.length;
+  const gOf=i=>errs.findIndex(e=>e.lines.includes(i));
+  if(!st.ui) st.ui={found:[],miss:0,clicked:{}};
+  let h='<div class="found" id="found"></div><pre class="code lines'+(st.done?' locked':'')+'">'+(q.file?'<span class="fn" style="margin-left:16px">'+esc(q.file)+'</span>':'');
+  lines.forEach((l,i)=>{h+='<span class="ln" data-i="'+i+'">'+(hl(l,q.lang)||' ')+'</span>';});
+  h+='</pre><div id="lineWhy"></div>';
+  body.innerHTML=h;
+  const lw=document.getElementById('lineWhy');
+  function upd(){
+    document.getElementById('found').innerHTML='Bulunan hata: <b>'+st.ui.found.length+'</b> / '+need+(st.ui.miss?' · hatasız satıra tıklama: '+st.ui.miss:'');
+    body.querySelectorAll('.ln').forEach(el=>{const i=+el.dataset.i,g=gOf(i);
+      el.classList.toggle('hit',g>-1&&st.ui.found.includes(g)&&(st.ui.clicked[g]===i));
+      if(st.done&&g>-1&&st.ui.clicked[g]===undefined&&errs[g].lines[0]===i)el.classList.add('reveal');});
+    lw.innerHTML=st.ui.found.slice().sort((a,b)=>a-b).map(g=>{const ln=(st.ui.clicked[g]!==undefined?st.ui.clicked[g]:errs[g].lines[0])+1;
+      return '<div class="fb show '+(st.ui.clicked[g]!==undefined?'ok':'no')+'" style="margin-top:8px"><div class="h">Satır '+ln+'</div><p>'+md(errs[g].why)+'</p></div>';}).join('');
+  }
+  upd();
+  if(st.done) return;
+  const chk=document.getElementById('check');chk.style.display='';chk.className='btn ghost';chk.textContent='Bulamadım, göster';
+  chk.onclick=()=>{
+    errs.forEach((_,g)=>{if(!st.ui.found.includes(g))st.ui.found.push(g);});
+    st.extra='hataların hepsini kendin bulamadın';
+    st.done=true;upd();body.querySelector('.lines').classList.add('locked');finish(st,false,q);
+  };
+  body.querySelectorAll('.ln').forEach(el=>el.onclick=()=>{
+    if(st.done) return;
+    const i=+el.dataset.i,g=gOf(i);
+    if(g>-1){ if(!st.ui.found.includes(g)){st.ui.found.push(g);st.ui.clicked[g]=i;upd();}
+      if(st.ui.found.length===need){body.querySelector('.lines').classList.add('locked');if(st.ui.miss)st.extra=st.ui.miss+' kez hatasız satıra tıkladın';finish(st,st.ui.miss===0,q);} }
+    else{ st.ui.miss++; el.classList.remove('miss');void el.offsetWidth;el.classList.add('miss');upd(); }
+  });
+};
+function norm(s){return String(s).trim().toLocaleLowerCase('tr').replace(/\s+/g,' ');}
+BUILD.fill=function(q,st,body){
+  if(!st.ui) st.ui={vals:q.blanks.map(()=>'')};
+  const isCode=q.code!=null;
+  const src=isCode?q.code:q.text;
+  let rendered;
+  if(isCode){
+    rendered=hl(src.replace(/\[\[(\d+)\]\]/g,'QQB$1QQ'),q.lang).replace(/QQB(\d+)QQ/g,(_,n)=>'%%B'+n+'%%');
+  } else rendered=md(src).replace(/\[\[(\d+)\]\]/g,(_,n)=>'%%B'+n+'%%');
+  rendered=rendered.replace(/%%B(\d+)%%/g,(_,n)=>{
+    const b=q.blanks[+n];
+    if(b.opts){
+      if(!b._perm) b._perm=shuffle(b.opts.map((_,i)=>i));
+      return '<select data-b="'+n+'" aria-label="Boşluk '+(+n+1)+'"><option value="">— seç —</option>'+b._perm.map(i=>'<option value="'+i+'">'+esc(b.opts[i])+'</option>').join('')+'</select>';
+    }
+    return '<input data-b="'+n+'" aria-label="Boşluk '+(+n+1)+'" autocomplete="off" spellcheck="false" style="width:'+Math.max(6,(b.w||8))+'ch">';
+  });
+  body.innerHTML=isCode?'<pre class="code fill-code">'+(q.file?'<span class="fn">'+esc(q.file)+'</span>':'')+rendered+'</pre>':'<div class="fill-text">'+rendered+'</div>';
+  const els=[...body.querySelectorAll('[data-b]')];
+  els.forEach(el=>{el.value=st.ui.vals[+el.dataset.b];el.oninput=el.onchange=()=>{st.ui.vals[+el.dataset.b]=el.value;};});
+  function judge(){
+    let all=true;
+    els.forEach(el=>{
+      const b=q.blanks[+el.dataset.b];let ok;
+      if(b.opts) ok=el.value!==''&&+el.value===b.a;
+      else ok=b.ans.some(a=>norm(a)===norm(el.value));
+      el.classList.add(ok?'ok':'no');el.disabled=true;
+      if(!ok){all=false;el.insertAdjacentHTML('afterend','<span class="fix">→ '+esc(b.opts?b.opts[b.a]:b.ans[0])+'</span>');}
+    });
+    return all;
+  }
+  if(st.done){judge();return;}
+  const chk=document.getElementById('check');chk.style.display='';
+  chk.onclick=()=>{
+    if(els.some(el=>el.value.trim()==='')){chk.textContent='Önce bütün boşlukları doldur';setTimeout(()=>chk.textContent='Kontrol et',1400);return;}
+    finish(st,judge(),q);
+  };
+};
+BUILD.match=function(q,st,body){
+  const rights=q.pairs.map(p=>p[1]);
+  if(!st.ui) st.ui={lperm:shuffle(q.pairs.map((_,i)=>i)),rperm:shuffle(rights.map((_,i)=>i)),vals:{}};
+  let h=(q.code?codeBlock(q):'')+'<div class="match">';
+  st.ui.lperm.forEach(li=>{
+    h+='<div class="mrow" data-li="'+li+'"><div class="l">'+md(q.pairs[li][0])+'</div><select data-li="'+li+'"><option value="">— eşleştir —</option>'+
+      st.ui.rperm.map(ri=>'<option value="'+ri+'">'+esc(rights[ri].replace(/`/g,''))+'</option>').join('')+'</select><span class="mk"></span></div>';
+  });
+  body.innerHTML=h+'</div>';
+  const sels=[...body.querySelectorAll('select')];
+  sels.forEach(s=>{const li=s.dataset.li;if(st.ui.vals[li]!=null)s.value=st.ui.vals[li];s.onchange=()=>{st.ui.vals[li]=s.value;};});
+  function judge(){
+    let all=true;
+    sels.forEach(s=>{const li=+s.dataset.li,row=s.closest('.mrow');const ok=s.value!==''&&rights[+s.value]===rights[li];
+      row.classList.add(ok?'ok':'no');row.querySelector('.mk').textContent=ok?'✓':'✕';s.disabled=true;
+      if(!ok){all=false;row.insertAdjacentHTML('beforeend','<div class="fixm">Doğrusu: '+md(rights[li])+'</div>');}
+    });
+    return all;
+  }
+  if(st.done){judge();return;}
+  const chk=document.getElementById('check');chk.style.display='';
+  chk.onclick=()=>{
+    if(sels.some(s=>s.value==='')){chk.textContent='Önce hepsini eşleştir';setTimeout(()=>chk.textContent='Kontrol et',1400);return;}
+    finish(st,judge(),q);
+  };
+};
+BUILD.order=function(q,st,body){
+  if(!st.ui){let p=shuffle(q.items.map((_,i)=>i));if(p.every((v,i)=>v===i)&&p.length>1)p.reverse();st.ui={pool:p,out:[]};}
+  body.innerHTML=(q.code?codeBlock(q):'')+'<div class="order-out" id="oout"></div><div class="order-pool" id="opool"></div>';
+  const out=document.getElementById('oout'),pool=document.getElementById('opool');
+  function draw(){
+    out.innerHTML=st.ui.out.map((i,k)=>'<button class="oitem" data-i="'+i+'">'+md(q.items[i])+'</button>').join('');
+    pool.innerHTML=st.ui.pool.map(i=>'<button class="oitem" data-i="'+i+'">'+md(q.items[i])+'</button>').join('');
+    if(st.done){paintRes();return;}
+    pool.querySelectorAll('.oitem').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;st.ui.pool=st.ui.pool.filter(x=>x!==i);st.ui.out.push(i);draw();});
+    out.querySelectorAll('.oitem').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;st.ui.out=st.ui.out.filter(x=>x!==i);st.ui.pool.push(i);draw();});
+  }
+  function paintRes(){
+    [...out.querySelectorAll('.oitem')].forEach((b,k)=>{const i=+b.dataset.i;const ok=i===k;b.classList.add(ok?'ok':'no');b.disabled=true;if(!ok)b.insertAdjacentHTML('beforeend','<span class="fixo">doğru yeri: '+(i+1)+'</span>');});
+  }
+  draw();
+  if(st.done) return;
+  const chk=document.getElementById('check');chk.style.display='';
+  chk.onclick=()=>{
+    if(st.ui.pool.length){chk.textContent='Önce hepsini sırala';setTimeout(()=>chk.textContent='Kontrol et',1400);return;}
+    const ok=st.ui.out.every((v,k)=>v===k);
+    paintRes();finish(st,ok,q);
+  };
+};
+
+// --- Sonuç ---
+function renderEnd(){
+  const n=order.length,c=correct(),a=answered(),p=Math.round(c/n*100);
+  document.getElementById('topCount').textContent='Sonuç';
+  let msg=p>=85?'Harika! Bu konuya hâkimsin.':p>=60?'İyi gidiyorsun. Yanlış yaptığın soruların açıklamalarını bir kez daha oku.':'Bu konuyu sunudan bir kez daha gözden geçirip yanlışlarını yeniden çöz.';
+  if(a<n) msg='Cevaplanmamış '+(n-a)+' soru var. '+msg;
+  const wrong=order.map((qi,i)=>({qi,i})).filter(x=>!state[x.i].ok);
+  let h='<h1 class="topic">'+esc(DATA.title)+'</h1><section class="card result">'+
+    '<div class="ring" style="--p:'+p+'"><span>%'+p+'</span></div>'+
+    '<div style="font-weight:800;font-size:calc(1.15rem + var(--fsp))">'+c+' / '+n+' doğru</div><p class="msg">'+msg+'</p>'+
+    '<div class="center">'+(wrong.length?'<button class="btn" id="redo">Yanlış / boş soruları yeniden çöz ('+wrong.length+')</button>':'')+
+    '<button class="btn ghost" id="again">Baştan başla</button><button class="btn ghost" id="back">Sorulara dön</button></div>';
+  if(wrong.length){
+    h+='<div class="review"><h3>Gözden geçir</h3>'+wrong.map(x=>'<button data-go="'+x.i+'"><span class="n">'+(x.i+1)+'.</span><span>'+md(ALL[x.qi].q.split('\n')[0])+'</span></button>').join('')+'</div>';
+  }
+  app.innerHTML=h+'</section>';
+  const r=document.getElementById('redo');if(r)r.onclick=()=>start(false,wrong.map(x=>x.qi));
+  document.getElementById('again').onclick=()=>{mode='start';render();};
+  document.getElementById('back').onclick=()=>{mode='quiz';render();};
+  app.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{cur=+b.dataset.go;mode='quiz';render();});
+}
+
+function render(){ if(mode==='start')renderStart(); else if(mode==='quiz')renderQuiz(); else renderEnd(); }
+
+document.addEventListener('keydown',e=>{
+  const tag=(e.target.tagName||'').toLowerCase();
+  if(tag==='input'||tag==='select'||tag==='textarea'){ if(e.key==='Enter'&&mode==='quiz'){const c=document.getElementById('check');if(c&&c.style.display!=='none'){e.preventDefault();c.click();}} return; }
+  if(e.key==='f'||e.key==='F'){ if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen(); return; }
+  if(mode!=='quiz') return;
+  if(e.key==='ArrowRight'){document.getElementById('next').click();}
+  else if(e.key==='ArrowLeft'){document.getElementById('prev').click();}
+  else if(e.key==='Enter'){const c=document.getElementById('check');if(c&&c.style.display!=='none')c.click();else document.getElementById('next').click();}
+  else if(/^[1-6]$/.test(e.key)){const b=document.querySelectorAll('#qbody .opts .opt, #qbody .tfrow .opt')[+e.key-1];if(b&&!b.disabled)b.click();}
+});
+render();
+})();
+</script>
+</body>
+</html>
